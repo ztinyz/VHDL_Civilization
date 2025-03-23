@@ -1,0 +1,4 @@
+Running: xsim.dir/Tris_logic_behav/xsimk.exe -simmode gui -wdb Tris_logic_behav.wdb -simrunnum 0 -socket 56012
+Design successfully loaded
+Design Loading Memory Usage: 7264 KB (Peak: 7264 KB)
+Design Loading CPU Usage: 15 ms

@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2016.4 (64-bit)
+# SW Build 1756540 on Mon Jan 23 19:11:23 MST 2017
+# IP Build 1755317 on Mon Jan 23 20:30:07 MST 2017
+# Start of session at: Wed May 08 15:19:10 2024
+# Process ID: 12676
+# Current directory: C:/Users/Bardi/Desktop/VHDL_TETRIS/project_1/project_1.runs/impl_3
+# Command line: vivado.exe -log vga.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source vga.tcl -notrace
+# Log file: C:/Users/Bardi/Desktop/VHDL_TETRIS/project_1/project_1.runs/impl_3/vga.vdi
+# Journal file: C:/Users/Bardi/Desktop/VHDL_TETRIS/project_1/project_1.runs/impl_3\vivado.jou
+#-----------------------------------------------------------
+source vga.tcl -notrace

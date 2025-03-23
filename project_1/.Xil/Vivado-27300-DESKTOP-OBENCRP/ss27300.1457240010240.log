@@ -1,0 +1,30 @@
+srcscan starts
+=============== Using vdb files for VHDL std libs ===========
+INFO: VHDL library search path for library "std" is now "C:/Xilinx/Vivado/2023.2/data/precomp_hsv/vhdl/std" (VHDL-1505)
+INFO: VHDL library search path for library "synopsys" is now "C:/Xilinx/Vivado/2023.2/data/precomp_hsv/vhdl/synopsys" (VHDL-1505)
+INFO: VHDL library search path for library "ieee" is now "C:/Xilinx/Vivado/2023.2/data/precomp_hsv/vhdl/ieee" (VHDL-1505)
+INFO: VHDL library search path for library "unimacro" is now "C:/Xilinx/Vivado/2023.2/data/precomp_hsv/vhdl/unimacro" (VHDL-1505)
+INFO: VHDL library search path for library "unisim" is now "C:/Xilinx/Vivado/2023.2/data/precomp_hsv/vhdl/unisim" (VHDL-1505)
+INFO: VHDL library search path for library "vl" is now "C:/Xilinx/Vivado/2023.2/data/precomp_hsv/vhdl/vl" (VHDL-1505)
+INFO: VHDL library search path for library "xpm" is now "C:/Xilinx/Vivado/2023.2/data/precomp_hsv/vhdl/xpm" (VHDL-1505)
+-- Analyzing VHDL file "C:/Users/bardi/Desktop/VHDL_TETRIS/project_1/project_1.srcs/sources_1/new/MAIN.vhd" into library xil_defaultlib (VHDL-9003)
+INFO: analyzing entity 'vga' (VHDL-1012)
+INFO: analyzing architecture 'Behavioral' of entity 'vga' (VHDL-9006)
+-- Analyzing VHDL file "C:/Users/bardi/Desktop/VHDL_TETRIS/project_1/project_1.srcs/sources_1/new/SSD.vhd" into library xil_defaultlib (VHDL-9003)
+INFO: analyzing entity 'SSD' (VHDL-1012)
+INFO: analyzing architecture 'behavioral' of entity 'ssd' (VHDL-9006)
+-- Analyzing VHDL file "C:/Users/bardi/Desktop/VHDL_TETRIS/project_1/project_1.srcs/sources_1/new/clkdiv.vhd" into library xil_defaultlib (VHDL-9003)
+INFO: analyzing entity 'clkdiv' (VHDL-1012)
+INFO: analyzing architecture 'Behavioral' of entity 'clkdiv' (VHDL-9006)
+-- Analyzing VHDL file "C:/Users/bardi/Desktop/VHDL_TETRIS/project_1/project_1.srcs/sources_1/new/mono_pulse_generator.vhd" into library xil_defaultlib (VHDL-9003)
+INFO: analyzing entity 'mono' (VHDL-1012)
+INFO: analyzing architecture 'behavioral' of entity 'mono' (VHDL-9006)
+Listing tops:
+VHDLTop: library:xil_defaultlib entity:vga arch:
+VHDLTop: library:xil_defaultlib entity:vga arch:
+END of tops
+C:/Users/bardi/Desktop/VHDL_TETRIS/project_1/project_1.srcs/sources_1/new/MAIN.vhd(26): INFO: processing 'vga_default(Behavioral)' (VHDL-1067)
+C:/Users/bardi/Desktop/VHDL_TETRIS/project_1/project_1.srcs/sources_1/new/clkdiv.vhd(34): INFO: processing 'clkdiv_default(Behavioral)' (VHDL-1067)
+C:/Users/bardi/Desktop/VHDL_TETRIS/project_1/project_1.srcs/sources_1/new/mono_pulse_generator.vhd(6): INFO: processing 'mono_default(behavioral)' (VHDL-1067)
+C:/Users/bardi/Desktop/VHDL_TETRIS/project_1/project_1.srcs/sources_1/new/SSD.vhd(6): INFO: processing 'SSD_default(behavioral)' (VHDL-1067)
+srcscan exits with return value 0
