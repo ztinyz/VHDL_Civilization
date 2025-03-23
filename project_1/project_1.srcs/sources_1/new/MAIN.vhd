@@ -72,6 +72,8 @@ signal MPG_out: std_logic_vector(4 downto 0);
 signal reset: std_logic;
 signal clk25MHz : std_logic;
 signal clock : std_logic := '0';
+signal counterPing: std_logic_vector (24 downto 0):= (others => '0');
+signal clkPing : std_logic;
 signal s_digits: std_logic_vector(15 downto 0) := x"1234";
 
 signal TCH : std_logic;
@@ -83,13 +85,15 @@ signal CoordY : integer range 0 to 3;
 
 signal Select_CoordX : std_logic_vector(1 downto 0) := "00";
 signal Select_CoordY : std_logic_vector(1 downto 0) := "00";
+signal Prev_Type: integer range 0 to 3;
 
 type matrix is array(3 downto 0, 3 downto 0) of integer;
 
-signal Squares : matrix :=((0,1,2,3),
-                           (4,5,6,7),
-                           (8,9,10,11),
-                           (1,1,2,3));
+signal Squares : matrix :=((3,3,3,3),
+                           (3,3,3,3),
+                           (3,3,3,3),
+                           (3,3,3,3));
+                           
 -- end declaration space
 begin
 
@@ -97,7 +101,22 @@ clkdiv_instance: clkdiv port map(clk_out1=>clk25MHz,clk_in1=>clk,reset=>MPG_out(
 MPG_instance: mono port map (clk => clk, btn => btn, enable => MPG_out);
 SSD_instance: SSD port map (clk => clk, digits => s_digits, an => an, cat => cat);
 
-reset <= MPG_out(0);
+reset <= sw(0);
+
+process(clk)
+begin
+    if reset = '1' then
+        counterPing <= (others => '0');
+        clkPing <= '0';
+    end if;
+    if rising_edge(clk) then
+        counterPing <= counterPing + '1';
+        if counterPing = x"FFFFF"  then
+            clkPing <= not(clkPing);
+        end if;
+    end if;
+    
+end process;
 
 process(clk25MHz)
 begin
@@ -157,27 +176,56 @@ end process;
 
 process(clk25MHz)
 begin
-    if rising_edge(clk25MHz) then
-        if MPG_out(2) = '1' then
-            Select_CoordX <= Select_CoordX - '1';
-        end if;
-        
-        if MPG_out(3) = '1' then
-            Select_CoordX <= Select_CoordX + '1';
-        end if;
-        
-        if MPG_out(1) = '1' then
-            Select_CoordY <= Select_CoordY - '1';
-        end if;
-        
-        if MPG_out(4) = '1' then
-            Select_CoordY <= Select_CoordY + '1';
-        end if;
-        
-        s_digits <= "000000" & Select_CoordX & "000000" & Select_CoordY;
-        
-        Squares(to_integer(unsigned(Select_CoordX)), to_integer(unsigned(Select_CoordY))) <= 0;
+    if reset = '1' then
+        Squares <=((3,3,3,3),
+                   (3,3,3,3),
+                   (3,3,3,3),
+                   (3,3,3,3));
+        Select_CoordY <= "00";
+        Select_CoordX <= "00";
     end if;
+    if rising_edge(clk25MHz) then
+    
+        if MPG_out(4 downto 1) /= x"0" then
+            if Squares(to_integer(unsigned(Select_CoordX)), to_integer(unsigned(Select_CoordY))) /= 0 then
+                Squares(to_integer(unsigned(Select_CoordX)), to_integer(unsigned(Select_CoordY))) <= Prev_Type;
+            end if;
+            
+            if MPG_out(2) = '1' then
+                Select_CoordX <= Select_CoordX - '1';
+            end if;
+            
+            if MPG_out(3) = '1' then
+                Select_CoordX <= Select_CoordX + '1';
+            end if;
+            
+            if MPG_out(1) = '1' then
+                Select_CoordY <= Select_CoordY - '1';
+            end if;
+            
+            if MPG_out(4) = '1' then
+                Select_CoordY <= Select_CoordY + '1';
+            end if;
+            
+        end if;
+        
+        if MPG_out(0) = '1' then
+            Squares(to_integer(unsigned(Select_CoordX)), to_integer(unsigned(Select_CoordY))) <= 0;
+            Prev_Type <= 0;
+        end if;
+        s_digits <= "000000" & Select_CoordX & "000000" & Select_CoordY;
+       
+        if(Squares(to_integer(unsigned(Select_CoordX)), to_integer(unsigned(Select_CoordY))) /= 1) then
+            Prev_Type <= Squares(to_integer(unsigned(Select_CoordX)), to_integer(unsigned(Select_CoordY)));
+            Squares(to_integer(unsigned(Select_CoordX)), to_integer(unsigned(Select_CoordY))) <= 1;
+        end if;
+    end if;
+end process;
+
+process(clkPing,MPG_out)
+begin
+
+
 end process;
 
 led <= "000000" & Select_CoordX & "000000" & Select_CoordY;
@@ -196,15 +244,18 @@ begin
                     CoordX <= (Hcount/160) - 1;
                     CoordY <= (Vcount/120) - 1;
                     case Squares(CoordX,CoordY) is
-                        when 0 => R:= "1111";
-                                  B:= "1111";
-                                  G:= "1111";
-                        when 1 => R:= "0000";
+                        when 0 => R:= "0000";
                                   B:= "0000";
-                                  G:= "1111";
-                        when others =>R:= "1111";
+                                  G:= "0000";
+                        when 1 => R:= "1001";
+                                  B:= "1001";
+                                  G:= "1001";
+                        when 2 => R:= "1101";
+                                  B:= "1101";
+                                  G:= "1101";
+                        when others =>R:= "0000";
                                       B:= "0000";
-                                      G:= "0000";
+                                      G:= "1111";
                      end case;
                  end if;
             end if;

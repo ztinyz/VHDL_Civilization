@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="impl_2" LaunchPart="xc7a35tcpg236-1" LaunchTime="1742719036">
+<GenRun Id="impl_2" LaunchPart="xc7a35tcpg236-1" LaunchTime="1742750821">
   <File Type="ROUTE-PWR" Name="vga_power_routed.rpt"/>
   <File Type="PA-TCL" Name="vga.tcl"/>
   <File Type="ROUTE-PWR-SUM" Name="vga_power_summary_routed.pb"/>
@@ -143,7 +143,9 @@
     </Config>
   </FileSet>
   <Strategy Version="1" Minor="2">
-    <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2016"/>
+    <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023">
+      <Desc>Default settings for Implementation.</Desc>
+    </StratHandle>
     <Step Id="init_design"/>
     <Step Id="opt_design"/>
     <Step Id="power_opt_design"/>

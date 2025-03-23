@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2023.2 (win64) Build 4029153 Fri Oct 13 20:14:34 MDT 2023
-| Date         : Sun Mar 23 10:37:35 2025
+| Date         : Sun Mar 23 19:27:21 2025
 | Host         : DESKTOP-OBENCRP running 64-bit major release  (build 9200)
 | Command      : report_control_sets -verbose -file vga_control_sets_placed.rpt
 | Design       : vga
@@ -23,11 +23,11 @@ Table of Contents
 +----------------------------------------------------------+-------+
 |                          Status                          | Count |
 +----------------------------------------------------------+-------+
-| Total control sets                                       |    10 |
-|    Minimum number of control sets                        |    10 |
+| Total control sets                                       |    11 |
+|    Minimum number of control sets                        |    11 |
 |    Addition due to synthesis replication                 |     0 |
 |    Addition due to physical synthesis replication        |     0 |
-| Unused register locations in slices containing registers |    53 |
+| Unused register locations in slices containing registers |    52 |
 +----------------------------------------------------------+-------+
 * Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
 ** Run report_qor_suggestions for automated merging and remapping suggestions
@@ -39,13 +39,13 @@ Table of Contents
 +--------------------+-------+
 |       Fanout       | Count |
 +--------------------+-------+
-| Total control sets |    10 |
+| Total control sets |    11 |
 | >= 0 to < 4        |     3 |
-| >= 4 to < 6        |     2 |
-| >= 6 to < 8        |     0 |
+| >= 4 to < 6        |     3 |
+| >= 6 to < 8        |     1 |
 | >= 8 to < 10       |     0 |
 | >= 10 to < 12      |     1 |
-| >= 12 to < 14      |     2 |
+| >= 12 to < 14      |     1 |
 | >= 14 to < 16      |     0 |
 | >= 16              |     2 |
 +--------------------+-------+
@@ -58,31 +58,32 @@ Table of Contents
 +--------------+-----------------------+------------------------+-----------------+--------------+
 | Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
 +--------------+-----------------------+------------------------+-----------------+--------------+
-| No           | No                    | No                     |              53 |           21 |
+| No           | No                    | No                     |              88 |           36 |
 | No           | No                    | Yes                    |              14 |            6 |
 | No           | Yes                   | No                     |               0 |            0 |
-| Yes          | No                    | No                     |               9 |            6 |
+| Yes          | No                    | No                     |              15 |            6 |
 | Yes          | No                    | Yes                    |              11 |            4 |
-| Yes          | Yes                   | No                     |              12 |            3 |
+| Yes          | Yes                   | No                     |               4 |            1 |
 +--------------+-----------------------+------------------------+-----------------+--------------+
 
 
 4. Detailed Control Set Information
 -----------------------------------
 
-+------------------------------+----------------------+--------------------+------------------+----------------+--------------+
-|         Clock Signal         |     Enable Signal    |  Set/Reset Signal  | Slice Load Count | Bel Load Count | Bels / Slice |
-+------------------------------+----------------------+--------------------+------------------+----------------+--------------+
-|  clkdiv_instance/clk_reg_n_0 |                      |                    |                1 |              1 |         1.00 |
-|  clkdiv_instance/clk_reg_n_0 |                      | MPG_instance/AR[0] |                1 |              1 |         1.00 |
-|  clk_IBUF_BUFG               |                      | MPG_instance/AR[0] |                1 |              1 |         1.00 |
-|  clk_out1_BUFG               | CoordX               |                    |                2 |              4 |         2.00 |
-|  clk_IBUF_BUFG               | MPG_instance/s_en_in |                    |                4 |              5 |         1.25 |
-|  clk_out1_BUFG               | TCH_reg_n_0          | MPG_instance/AR[0] |                4 |             11 |         2.75 |
-|  clk_out1_BUFG               |                      | MPG_instance/AR[0] |                4 |             12 |         3.00 |
-|  clk_out1_BUFG               | R[3]_i_2_n_0         | G                  |                3 |             12 |         4.00 |
-|  clk_IBUF_BUFG               |                      |                    |                8 |             26 |         3.25 |
-|  clk_out1_BUFG               |                      |                    |               12 |             26 |         2.17 |
-+------------------------------+----------------------+--------------------+------------------+----------------+--------------+
++----------------------+----------------------+--------------------+------------------+----------------+--------------+
+|     Clock Signal     |     Enable Signal    |  Set/Reset Signal  | Slice Load Count | Bel Load Count | Bels / Slice |
++----------------------+----------------------+--------------------+------------------+----------------+--------------+
+|  clk_IBUF_BUFG       |                      | MPG_instance/reset |                1 |              1 |         1.00 |
+|  clkdiv_instance/clk |                      |                    |                1 |              1 |         1.00 |
+|  clkdiv_instance/clk |                      | MPG_instance/reset |                1 |              1 |         1.00 |
+|  clk25MHz_BUFG       | CoordX               |                    |                2 |              4 |         2.00 |
+|  clk25MHz_BUFG       | G[3]_i_2_n_0         | G[3]_i_1_n_0       |                1 |              4 |         4.00 |
+|  clk_IBUF_BUFG       | MPG_instance/s_en_in |                    |                2 |              5 |         2.50 |
+|  clk25MHz_BUFG       | B                    |                    |                2 |              6 |         3.00 |
+|  clk25MHz_BUFG       | TCH_reg_n_0          | sw_IBUF[0]         |                4 |             11 |         2.75 |
+|  clk25MHz_BUFG       |                      | sw_IBUF[0]         |                4 |             12 |         3.00 |
+|  clk_IBUF_BUFG       |                      |                    |               11 |             42 |         3.82 |
+|  clk25MHz_BUFG       |                      |                    |               24 |             45 |         1.88 |
++----------------------+----------------------+--------------------+------------------+----------------+--------------+
 
 

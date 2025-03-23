@@ -1,6 +1,6 @@
 -------------------------------------
 | Tool Version : Vivado v.2023.2
-| Date         : Sun Mar 23 10:37:35 2025
+| Date         : Sun Mar 23 19:27:21 2025
 | Host         : DESKTOP-OBENCRP
 | Design       : design_1
 | Device       : xc7a35t-cpg236-1--
