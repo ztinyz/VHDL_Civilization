@@ -127,7 +127,6 @@ set rc [catch {
   create_msg_db write_bitstream.pb
   set_param checkpoint.writeSynthRtdsInDcp 1
   set_param chipscope.maxJobs 8
-  set_param synth.incrementalSynthesisCache C:/Users/bardi/Desktop/VHDL_Civilization/project_1/.Xil/Vivado-39756-DESKTOP-OBENCRP/incrSyn
   set_param xicom.use_bs_reader 1
   set_param runs.launchOptions { -jobs 32  }
   open_checkpoint vga_routed.dcp

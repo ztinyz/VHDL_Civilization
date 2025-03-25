@@ -28,8 +28,8 @@ library ieee;
 entity vga is
     Port ( 
            clk : in STD_LOGIC;
-           btn : in STD_LOGIC_VECTOR (4 downto 0);
-           sw : in STD_LOGIC_VECTOR (1 downto 0);
+           btn : in STD_LOGIC_VECTOR (4 downto 0); -- used for controlls
+           sw : in STD_LOGIC_VECTOR (15 downto 0); -- used 0 for reset
            cat : out STD_LOGIC_VECTOR (6 downto 0);
            an : out STD_LOGIC_VECTOR (3 downto 0);
            led : out STD_LOGIC_VECTOR (15 downto 0);
@@ -75,6 +75,7 @@ signal clock : std_logic := '0';
 signal counterPing: std_logic_vector (24 downto 0):= (others => '0');
 signal clkPing : std_logic;
 signal s_digits: std_logic_vector(15 downto 0) := x"1234";
+signal select_building: integer range 0 to 3;
 
 signal TCH : std_logic;
 signal Hcount : integer range 0 to 1687;
@@ -89,10 +90,10 @@ signal Prev_Type: integer range 0 to 3;
 
 type matrix is array(3 downto 0, 3 downto 0) of integer;
 
-signal Squares : matrix :=((3,3,3,3),
-                           (3,3,3,3),
-                           (3,3,3,3),
-                           (3,3,3,3));
+signal Squares : matrix :=((0,0,0,0),
+                          (0,0,0,0),
+                          (0,0,0,0),
+                          (0,0,0,0));
                            
 -- end declaration space
 begin
@@ -102,8 +103,9 @@ MPG_instance: mono port map (clk => clk, btn => btn, enable => MPG_out);
 SSD_instance: SSD port map (clk => clk, digits => s_digits, an => an, cat => cat);
 
 reset <= sw(0);
+select_building <= TO_INTEGER(unsigned(sw(15 downto 14)));
 
-process(clk)
+process(clk) -- unused
 begin
     if reset = '1' then
         counterPing <= (others => '0');
@@ -115,7 +117,6 @@ begin
             clkPing <= not(clkPing);
         end if;
     end if;
-    
 end process;
 
 process(clk25MHz)
@@ -177,17 +178,17 @@ end process;
 process(clk25MHz)
 begin
     if reset = '1' then
-        Squares <=((3,3,3,3),
-                   (3,3,3,3),
-                   (3,3,3,3),
-                   (3,3,3,3));
+        Squares <=((1,1,1,1),
+                  (1,1,1,1),
+                  (1,1,1,1),
+                  (1,1,1,1));
         Select_CoordY <= "00";
         Select_CoordX <= "00";
     end if;
     if rising_edge(clk25MHz) then
     
         if MPG_out(4 downto 1) /= x"0" then
-            if Squares(to_integer(unsigned(Select_CoordX)), to_integer(unsigned(Select_CoordY))) /= 0 then
+            if Squares(to_integer(unsigned(Select_CoordX)), to_integer(unsigned(Select_CoordY))) /= select_building then
                 Squares(to_integer(unsigned(Select_CoordX)), to_integer(unsigned(Select_CoordY))) <= Prev_Type;
             end if;
             
@@ -210,14 +211,14 @@ begin
         end if;
         
         if MPG_out(0) = '1' then
-            Squares(to_integer(unsigned(Select_CoordX)), to_integer(unsigned(Select_CoordY))) <= 0;
-            Prev_Type <= 0;
+            Squares(to_integer(unsigned(Select_CoordX)), to_integer(unsigned(Select_CoordY))) <= select_building;
+            Prev_Type <= select_building;
         end if;
         s_digits <= "000000" & Select_CoordX & "000000" & Select_CoordY;
        
-        if(Squares(to_integer(unsigned(Select_CoordX)), to_integer(unsigned(Select_CoordY))) /= 1) then
+        if(Squares(to_integer(unsigned(Select_CoordX)), to_integer(unsigned(Select_CoordY))) /= 9) then
             Prev_Type <= Squares(to_integer(unsigned(Select_CoordX)), to_integer(unsigned(Select_CoordY)));
-            Squares(to_integer(unsigned(Select_CoordX)), to_integer(unsigned(Select_CoordY))) <= 1;
+            Squares(to_integer(unsigned(Select_CoordX)), to_integer(unsigned(Select_CoordY))) <= 9;
         end if;
     end if;
 end process;
@@ -228,7 +229,7 @@ begin
 
 end process;
 
-led <= "000000" & Select_CoordX & "000000" & Select_CoordY;
+led <= x"000" & "00" & sw(15 downto 14);
 
 process(clk25MHz)
 variable R,G,B : std_logic_vector(3 downto 0);
@@ -247,14 +248,20 @@ begin
                         when 0 => R:= "0000";
                                   B:= "0000";
                                   G:= "0000";
-                        when 1 => R:= "1001";
+                        when 1 => R:= "1111";
+                                  B:= "0000";
+                                  G:= "0000";
+                        when 2 => R:= "0000";
+                                  B:= "1111";
+                                  G:= "0000";
+                        when 3 => R:= "0000";
+                                  B:= "0000";
+                                  G:= "1111";
+                        when 9 => R:= "1001";
                                   B:= "1001";
                                   G:= "1001";
-                        when 2 => R:= "1101";
-                                  B:= "1101";
-                                  G:= "1101";
-                        when others =>R:= "0000";
-                                      B:= "0000";
+                        when others =>R:= "1111";
+                                      B:= "1111";
                                       G:= "1111";
                      end case;
                  end if;
