@@ -29,7 +29,7 @@ entity vga is
     Port ( 
            clk : in STD_LOGIC;
            btn : in STD_LOGIC_VECTOR (4 downto 0); -- used for controlls
-           sw : in STD_LOGIC_VECTOR (15 downto 0); -- used 0 for reset
+           sw : in STD_LOGIC_VECTOR (15 downto 0); -- used 0 for reset,1 for deactivate select, 15-14 for select
            cat : out STD_LOGIC_VECTOR (6 downto 0);
            an : out STD_LOGIC_VECTOR (3 downto 0);
            led : out STD_LOGIC_VECTOR (15 downto 0);
@@ -72,8 +72,7 @@ signal MPG_out: std_logic_vector(4 downto 0);
 signal reset: std_logic;
 signal clk25MHz : std_logic;
 signal clock : std_logic := '0';
-signal counterPing: std_logic_vector (24 downto 0):= (others => '0');
-signal clkPing : std_logic;
+signal counter25MHz : std_logic_vector(1 downto 0) := "00";
 signal s_digits: std_logic_vector(15 downto 0) := x"1234";
 signal select_building: integer range 0 to 3;
 
@@ -230,18 +229,13 @@ SSD_instance: SSD port map (clk => clk, digits => s_digits, an => an, cat => cat
 reset <= sw(0);
 select_building <= TO_INTEGER(unsigned(sw(15 downto 14)));
 
-process(clk) -- unused
+process(clk)
 begin
     if reset = '1' then
-        counterPing <= (others => '0');
-        clkPing <= '0';
+        counter25MHz <= "00";
+        
     end if;
-    if rising_edge(clk) then
-        counterPing <= counterPing + '1';
-        if counterPing = x"FFFFF"  then
-            clkPing <= not(clkPing);
-        end if;
-    end if;
+    
 end process;
 
 process(clk25MHz)
@@ -311,50 +305,46 @@ begin
         Select_CoordX <= "00";
     end if;
     if rising_edge(clk25MHz) then
-    
-        if MPG_out(4 downto 1) /= x"0" then
-            if Squares(to_integer(unsigned(Select_CoordX)), to_integer(unsigned(Select_CoordY))) = 9 then
+        if sw(1) = '1' then
+           if MPG_out(4 downto 1) /= x"0" then
+           
                 Squares(to_integer(unsigned(Select_CoordX)), to_integer(unsigned(Select_CoordY))) <= Prev_Type;
+                
+                if MPG_out(2) = '1' then
+                    Select_CoordX <= Select_CoordX - '1';
+                end if;
+                
+                if MPG_out(3) = '1' then
+                    Select_CoordX <= Select_CoordX + '1';
+                end if;
+                
+                if MPG_out(1) = '1' then
+                    Select_CoordY <= Select_CoordY - '1';
+                end if;
+                
+                if MPG_out(4) = '1' then
+                    Select_CoordY <= Select_CoordY + '1';
+                end if;
             end if;
             
-            if MPG_out(2) = '1' then
-                Select_CoordX <= Select_CoordX - '1';
+            if MPG_out(0) = '1' then
+                Squares(to_integer(unsigned(Select_CoordX)), to_integer(unsigned(Select_CoordY))) <= select_building;
+                Prev_Type <= select_building;
             end if;
             
-            if MPG_out(3) = '1' then
-                Select_CoordX <= Select_CoordX + '1';
-            end if;
+            s_digits <= "000000" & Select_CoordX & "000000" & Select_CoordY;
             
-            if MPG_out(1) = '1' then
-                Select_CoordY <= Select_CoordY - '1';
+            if(Squares(to_integer(unsigned(Select_CoordX)), to_integer(unsigned(Select_CoordY))) /= 9) then
+                Prev_Type <= Squares(to_integer(unsigned(Select_CoordX)), to_integer(unsigned(Select_CoordY)));
+                Squares(to_integer(unsigned(Select_CoordX)), to_integer(unsigned(Select_CoordY))) <= 9;
             end if;
-            
-            if MPG_out(4) = '1' then
-                Select_CoordY <= Select_CoordY + '1';
-            end if;
-            
-        end if;
-        
-        if MPG_out(0) = '1' then
-            Squares(to_integer(unsigned(Select_CoordX)), to_integer(unsigned(Select_CoordY))) <= select_building;
-            Prev_Type <= select_building;
-        end if;
-        s_digits <= "000000" & Select_CoordX & "000000" & Select_CoordY;
-       
-        if(Squares(to_integer(unsigned(Select_CoordX)), to_integer(unsigned(Select_CoordY))) /= 9) then
-            Prev_Type <= Squares(to_integer(unsigned(Select_CoordX)), to_integer(unsigned(Select_CoordY)));
-            Squares(to_integer(unsigned(Select_CoordX)), to_integer(unsigned(Select_CoordY))) <= 9;
-        end if;
+       else
+            Squares(to_integer(unsigned(Select_CoordX)), to_integer(unsigned(Select_CoordY))) <= Prev_Type;
+       end if;
     end if;
 end process;
 
-process(clkPing,MPG_out)
-begin
-
-
-end process;
-
-led <= x"000" & "00" & sw(15 downto 14);
+led <= sw;
 
 process(clk25MHz)
 variable R,G,B : std_logic_vector(3 downto 0);
@@ -379,7 +369,7 @@ begin
                         when 2 => R:= "0000";
                                   B:= "1111";
                                   G:= "0000";
-                        when 3 => Color <= farm(Vcount/4,Hcount/4);
+                        when 3 => Color <= farm(Vcount mod 120,Hcount mod 160);
                               R:= Color(11 downto 8);
                               B:= Color(3 downto 0);
                               G:= Color(7 downto 4);

@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2023.2 (win64) Build 4029153 Fri Oct 13 20:14:34 MDT 2023
-| Date         : Tue Mar 25 19:43:04 2025
+| Date         : Tue Mar 25 20:44:28 2025
 | Host         : DESKTOP-OBENCRP running 64-bit major release  (build 9200)
 | Command      : report_drc -file vga_drc_routed.rpt -pb vga_drc_routed.pb -rpx vga_drc_routed.rpx
 | Design       : vga
@@ -24,18 +24,12 @@ Table of Contents
       Design limits: <entire design considered>
            Ruledeck: default
              Max violations: <unlimited>
-             Violations found: 1
-+--------+----------+------------------------------------------------+------------+
-| Rule   | Severity | Description                                    | Violations |
-+--------+----------+------------------------------------------------+------------+
-| PLIO-3 | Warning  | Placement Constraints Check for IO constraints | 1          |
-+--------+----------+------------------------------------------------+------------+
+             Violations found: 0
++------+----------+-------------+------------+
+| Rule | Severity | Description | Violations |
++------+----------+-------------+------------+
++------+----------+-------------+------------+
 
 2. REPORT DETAILS
 -----------------
-PLIO-3#1 Warning
-Placement Constraints Check for IO constraints  
-Partially locked IO Bus is found. Following components of the IO Bus sw[15:0] are not locked:  sw[3]
-Related violations: <none>
-
 
