@@ -1,40 +1,20 @@
 <?xml version="1.0"?>
 <ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado.bat" Owner="bardi" Host="DESKTOP-OBENCRP" Pid="29604" HostCore="32" HostMemory="066094223360">
+    <Process Command="vivado.bat" Owner="bardi" Host="DESKTOP-OBENCRP" Pid="25032" HostCore="32" HostMemory="066094223360">
     </Process>
 </ProcessHandle>
 <?xml version="1.0"?>
 <ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado.bat" Owner="bardi" Host="DESKTOP-OBENCRP" Pid="21192" HostCore="32" HostMemory="066094223360">
+    <Process Command="vivado.bat" Owner="bardi" Host="DESKTOP-OBENCRP" Pid="21672" HostCore="32" HostMemory="066094223360">
     </Process>
 </ProcessHandle>
 <?xml version="1.0"?>
 <ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado.bat" Owner="bardi" Host="DESKTOP-OBENCRP" Pid="9592" HostCore="32" HostMemory="066094223360">
+    <Process Command="vivado.bat" Owner="bardi" Host="DESKTOP-OBENCRP" Pid="21024" HostCore="32" HostMemory="066094223360">
     </Process>
 </ProcessHandle>
 <?xml version="1.0"?>
 <ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado.bat" Owner="bardi" Host="DESKTOP-OBENCRP" Pid="33160" HostCore="32" HostMemory="066094223360">
-    </Process>
-</ProcessHandle>
-<?xml version="1.0"?>
-<ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado.bat" Owner="bardi" Host="DESKTOP-OBENCRP" Pid="22612" HostCore="32" HostMemory="066094223360">
-    </Process>
-</ProcessHandle>
-<?xml version="1.0"?>
-<ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado.bat" Owner="bardi" Host="DESKTOP-OBENCRP" Pid="8972" HostCore="32" HostMemory="066094223360">
-    </Process>
-</ProcessHandle>
-<?xml version="1.0"?>
-<ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado.bat" Owner="bardi" Host="DESKTOP-OBENCRP" Pid="21304" HostCore="32" HostMemory="066094223360">
-    </Process>
-</ProcessHandle>
-<?xml version="1.0"?>
-<ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado.bat" Owner="bardi" Host="DESKTOP-OBENCRP" Pid="18728" HostCore="32" HostMemory="066094223360">
+    <Process Command="vivado.bat" Owner="bardi" Host="DESKTOP-OBENCRP" Pid="19068" HostCore="32" HostMemory="066094223360">
     </Process>
 </ProcessHandle>
