@@ -25,7 +25,7 @@ else
 fi
 export LD_LIBRARY_PATH
 
-HD_PWD='C:/Users/bardi/Desktop/backup/VHDL_Civilization/project_1/project_1.runs/impl_2'
+HD_PWD='C:/Users/bardi/Desktop/VHDL_Civilization/project_1/project_1.runs/impl_2'
 cd "$HD_PWD"
 
 HD_LOG=runme.log

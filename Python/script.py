@@ -1,7 +1,7 @@
 from PIL import Image
 
 # Load the image
-image = Image.open("Sprite-0001.png").convert("RGBA")
+image = Image.open("farm.png").convert("RGBA")
 
 width, height = image.size
 
@@ -21,7 +21,7 @@ with open("vhdl_matrix.vhd", "w") as file:
     for y in range(height):
         file.write("    (")
         for x in range(width):
-            r, g, b = image.getpixel((x, y))  # Get 8-bit RGB values
+            r, g, b, k = image.getpixel((x, y))  # Get 8-bit RGB values
             r_4, g_4, b_4 = to_4bit(r), to_4bit(g), to_4bit(b)  # Convert to 4-bit
             
             # Convert to 12-bit hex format
