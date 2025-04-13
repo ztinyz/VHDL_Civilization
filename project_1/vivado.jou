@@ -3,10 +3,10 @@
 # SW Build 4029153 on Fri Oct 13 20:14:34 MDT 2023
 # IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
 # SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
-# Start of session at: Mon Apr  7 11:32:22 2025
-# Process ID: 4044
+# Start of session at: Sun Apr 13 18:57:18 2025
+# Process ID: 33356
 # Current directory: C:/Users/bardi/Desktop/VHDL_Civilization/project_1
-# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent11196 C:\Users\bardi\Desktop\VHDL_Civilization\project_1\project_1.xpr
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent32304 C:\Users\bardi\Desktop\VHDL_Civilization\project_1\project_1.xpr
 # Log file: C:/Users/bardi/Desktop/VHDL_Civilization/project_1/vivado.log
 # Journal file: C:/Users/bardi/Desktop/VHDL_Civilization/project_1\vivado.jou
 # Running On: DESKTOP-OBENCRP, OS: Windows, CPU Frequency: 4292 MHz, CPU Physical cores: 32, Host memory: 66094 MB
@@ -14,13 +14,6 @@
 start_gui
 open_project C:/Users/bardi/Desktop/VHDL_Civilization/project_1/project_1.xpr
 update_compile_order -fileset sources_1
-reset_run synth_2
-launch_runs synth_2 -jobs 32
-wait_on_run synth_2
-launch_runs impl_2 -jobs 32
-wait_on_run impl_2
-launch_runs impl_2 -to_step write_bitstream -jobs 32
-wait_on_run impl_2
 open_hw_manager
 connect_hw_server -allow_non_jtag
 open_hw_target
@@ -32,6 +25,9 @@ set_property FULL_PROBES.FILE {} [get_hw_devices xc7a35t_0]
 set_property PROGRAM.FILE {C:/Users/bardi/Desktop/VHDL_Civilization/project_1/project_1.runs/impl_2/vga.bit} [get_hw_devices xc7a35t_0]
 program_hw_devices [get_hw_devices xc7a35t_0]
 refresh_hw_device [lindex [get_hw_devices xc7a35t_0] 0]
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
 reset_run synth_2
 launch_runs synth_2 -jobs 32
 wait_on_run synth_2
@@ -49,10 +45,63 @@ launch_runs synth_2 -jobs 32
 wait_on_run synth_2
 launch_runs impl_2 -jobs 32
 wait_on_run impl_2
-open_run impl_2
+launch_runs impl_2 -to_step write_bitstream -jobs 32
+wait_on_run impl_2
+set_property PROBES.FILE {} [get_hw_devices xc7a35t_0]
+set_property FULL_PROBES.FILE {} [get_hw_devices xc7a35t_0]
+set_property PROGRAM.FILE {C:/Users/bardi/Desktop/VHDL_Civilization/project_1/project_1.runs/impl_2/vga.bit} [get_hw_devices xc7a35t_0]
+program_hw_devices [get_hw_devices xc7a35t_0]
+refresh_hw_device [lindex [get_hw_devices xc7a35t_0] 0]
+reset_run synth_2
+launch_runs synth_2 -jobs 32
+wait_on_run synth_2
+launch_runs impl_2 -jobs 32
+wait_on_run impl_2
+reset_run synth_2
+launch_runs synth_2 -jobs 32
+wait_on_run synth_2
+launch_runs impl_2 -jobs 32
+wait_on_run impl_2
+launch_runs impl_2 -to_step write_bitstream -jobs 32
+wait_on_run impl_2
+set_property PROBES.FILE {} [get_hw_devices xc7a35t_0]
+set_property FULL_PROBES.FILE {} [get_hw_devices xc7a35t_0]
+set_property PROGRAM.FILE {C:/Users/bardi/Desktop/VHDL_Civilization/project_1/project_1.runs/impl_2/vga.bit} [get_hw_devices xc7a35t_0]
+program_hw_devices [get_hw_devices xc7a35t_0]
+refresh_hw_device [lindex [get_hw_devices xc7a35t_0] 0]
+reset_run synth_2
+launch_runs synth_2 -jobs 32
+wait_on_run synth_2
+launch_runs impl_2 -jobs 32
+wait_on_run impl_2
 launch_runs impl_2 -to_step write_bitstream -jobs 32
 wait_on_run impl_2
 open_run impl_2
+set_property PROBES.FILE {} [get_hw_devices xc7a35t_0]
+set_property FULL_PROBES.FILE {} [get_hw_devices xc7a35t_0]
+set_property PROGRAM.FILE {C:/Users/bardi/Desktop/VHDL_Civilization/project_1/project_1.runs/impl_2/vga.bit} [get_hw_devices xc7a35t_0]
+program_hw_devices [get_hw_devices xc7a35t_0]
+refresh_hw_device [lindex [get_hw_devices xc7a35t_0] 0]
+reset_run synth_2
+launch_runs synth_2 -jobs 32
+wait_on_run synth_2
+launch_runs impl_2 -jobs 32
+wait_on_run impl_2
+launch_runs impl_2 -to_step write_bitstream -jobs 32
+wait_on_run impl_2
+set_property PROBES.FILE {} [get_hw_devices xc7a35t_0]
+set_property FULL_PROBES.FILE {} [get_hw_devices xc7a35t_0]
+set_property PROGRAM.FILE {C:/Users/bardi/Desktop/VHDL_Civilization/project_1/project_1.runs/impl_2/vga.bit} [get_hw_devices xc7a35t_0]
+program_hw_devices [get_hw_devices xc7a35t_0]
+refresh_hw_device [lindex [get_hw_devices xc7a35t_0] 0]
+reset_run synth_2
+launch_runs synth_2 -jobs 32
+wait_on_run synth_2
+launch_runs impl_2 -jobs 32
+wait_on_run impl_2
+refresh_design
+launch_runs impl_2 -to_step write_bitstream -jobs 32
+wait_on_run impl_2
 set_property PROBES.FILE {} [get_hw_devices xc7a35t_0]
 set_property FULL_PROBES.FILE {} [get_hw_devices xc7a35t_0]
 set_property PROGRAM.FILE {C:/Users/bardi/Desktop/VHDL_Civilization/project_1/project_1.runs/impl_2/vga.bit} [get_hw_devices xc7a35t_0]

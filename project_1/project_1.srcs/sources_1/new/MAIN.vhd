@@ -74,6 +74,7 @@ signal clk25MHz : std_logic;
 signal clock : std_logic := '0';
 signal counter25MHz : std_logic_vector(1 downto 0) := "00";
 signal s_digits: std_logic_vector(15 downto 0) := x"1234";
+signal s_score: std_logic_vector(15 downto 0) := x"0100";
 signal select_building: integer range 0 to 3;
 
 signal TCH : std_logic;
@@ -93,6 +94,9 @@ signal Squares : matrix :=((0,0,0,0),
                           (0,0,0,0),
                           (0,0,0,0),
                           (0,0,0,0));
+
+type building_score is array (0 to 4) of std_logic_vector (7 downto 0);
+constant b_score: building_score := ( x"00",x"10",x"1A",x"07",x"00");
 
 type texture is array (0 to 119, 0 to 159) of std_logic_vector(11 downto 0);
 
@@ -545,12 +549,13 @@ end process;
 process(clk25MHz)
 begin
     if reset = '1' then
-        Squares <=((1,1,1,1),
-                  (1,1,1,1),
-                  (1,1,1,1),
-                  (1,1,1,1));
+        Squares <=((0,0,0,0),
+                  (0,0,0,0),
+                  (0,0,0,0),
+                  (0,0,0,0));
         Select_CoordY <= "00";
         Select_CoordX <= "00";
+        s_score <= x"0000";
     end if;
     if rising_edge(clk25MHz) then
         if sw(1) = '1' then
@@ -576,11 +581,18 @@ begin
             end if;
             
             if MPG_out(0) = '1' then
+                case select_building is
+                    when 0 => s_score <= s_score - b_score(Prev_Type);
+                    when 1 => s_score <= s_score + x"10" - b_score(Prev_Type);
+                    when 2 => s_score <= s_score + x"1A" - b_score(Prev_Type);
+                    when 3 => s_score <= s_score + x"07" - b_score(Prev_Type);
+                    when others => s_score <= s_score - b_score(4);
+                end case;
                 Squares(to_integer(unsigned(Select_CoordX)), to_integer(unsigned(Select_CoordY))) <= select_building;
                 Prev_Type <= select_building;
             end if;
             
-            s_digits <= "000000" & Select_CoordX & "000000" & Select_CoordY;
+            s_digits <= s_score;
             
             if(Squares(to_integer(unsigned(Select_CoordX)), to_integer(unsigned(Select_CoordY))) /= 9) then
                 Prev_Type <= Squares(to_integer(unsigned(Select_CoordX)), to_integer(unsigned(Select_CoordY)));
