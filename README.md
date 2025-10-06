@@ -1,2 +1,2 @@
 # VHDL_Civilization
-A civilization/age of empires type game on a basys3 board using VHDL
+This is a Basys 3 game that consists of a grid of squares where you can select them individually ( using the buttons on the board ) and choose to put any of the 3 building types ( factory, farm, city ) inside the square. In order to select the builing you must use the swithes and when you are done selecting press the middle button to build it. The grid is shown in real time via the VGA output of the board.
