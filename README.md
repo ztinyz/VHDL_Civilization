@@ -12,8 +12,9 @@ The player interacts with a grid of squares and can select individual tiles and 
 - Farm
 - City
 \
-All interaction is done using the physical buttons and switches on the Basys 3, and the game state is rendered in real time over VGA.\
-This project demonstrates:
+All interaction is done using the physical buttons and switches on the Basys 3, and the game state is rendered in real time over VGA.
+
+## This project demonstrates:
 
 - Real-time VGA graphics generation
 - Hardware-based user input handling
@@ -21,6 +22,7 @@ This project demonstrates:
 - Digital design using VHDL on FPGA hardware
 
 # Gameplay & Controls
+\
 ## Grid Interaction
 
 - The game consists of a grid of visible squares.
