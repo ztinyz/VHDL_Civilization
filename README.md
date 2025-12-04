@@ -20,7 +20,7 @@ This project demonstrates:
 - Grid-based game logic
 - Digital design using VHDL on FPGA hardware
 
-## Gameplay & Controls
+# Gameplay & Controls
 ## Grid Interaction
 
 - The game consists of a grid of visible squares.
