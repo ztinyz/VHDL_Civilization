@@ -21,27 +21,27 @@ This project demonstrates:
 - Digital design using VHDL on FPGA hardware
 
 ## Gameplay & Controls
-### Grid Interaction
+## Grid Interaction
 
 - The game consists of a grid of visible squares.
 - Each square can hold one building.
 - The currently selected square is controlled using the directional buttons on the Basys 3 board.
 
-### Building Selection
+## Building Selection
 
 The switches are used to select which building type you want to place ( switches 15 and 14 ):
 - One switch setting corresponds to Factory 10 (binary)
 - One switch setting corresponds to Farm 11 (binary)
 - One switch setting corresponds to City 01 (binary)
 
-### Building Placement
+## Building Placement
 
 After selecting:
 - Move to the desired square using the directional buttons.
 - Select the building type using the switches.
 - Press the center button (middle button) to place the building.
 
-### Display
+## Display
 
 - The grid and buildings are displayed in real time using the VGA output.
 - Any placement or movement is immediately reflected on screen.
