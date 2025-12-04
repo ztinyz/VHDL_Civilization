@@ -11,7 +11,7 @@ The player interacts with a grid of squares and can select individual tiles and 
 - Factory
 - Farm
 - City
--
+
 All interaction is done using the physical buttons and switches on the Basys 3, and the game state is rendered in real time over VGA.
 
 ## This project demonstrates:
